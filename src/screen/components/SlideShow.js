@@ -3,18 +3,21 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 
 const SlideShow = ({ recommendedBooks }) => {
+  console.log(recommendedBooks);
   return (
     <Swiper autoplay autoplayTimeout={5} style={styles.wrapper} showsButtons={true}>
-      {recommendedBooks.map((book, index) => (
-        <View key={index} style={styles.slide}>
-          <TouchableOpacity style={styles.storyItem}
-            onClick={() =>{} }>
-            <Image source={book.image} style={styles.image} />
-            <Text style={styles.title}>{book.title}</Text>
-            {/* <Text style={styles.author}>{book.author}</Text> */}
-          </TouchableOpacity>
-        </View>
-      ))}
+      {
+        recommendedBooks.map((book, index) => (
+          <View key={index} style={styles.slide}>
+            <TouchableOpacity style={styles.storyItem}
+              onClick={() => { }}>
+              <Image source={book.image} style={styles.image} />
+              <Text style={styles.title}>{book.title}</Text>
+              {/* <Text style={styles.author}>{book.author}</Text> */}
+            </TouchableOpacity>
+          </View>
+        ))
+      }
     </Swiper>
   );
 };
