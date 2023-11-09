@@ -13,10 +13,9 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-
-         {/* <Stack.Screen name="StoryDetail" component={StoryDetail} /> */}
+          {/* <Stack.Screen name="StoryDetail" component={StoryDetail} /> */}
         <Stack.Screen name="/HomeScreen" component={HomeScreen} />
-        {/* <Stack.Screen name="/login" component={LoginScreen} /> */}
+        {/* <Stack.Screen name="/login" component={LoginScreen} /> */} 
         <Stack.Screen name="StoryDetail" component={StoryDetail} />
         <Stack.Screen name="ChapterDetail" component={ChapterDetail} />
       </Stack.Navigator>
