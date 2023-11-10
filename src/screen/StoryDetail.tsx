@@ -17,8 +17,8 @@ const StoryDetail = () => {
   }, []); 
 
   const fetchDataFromAPI = () => {
-    //http://10.0.2.2:3000 co gi tu doi nhe
-    const apiUrl = `http://10.0.0.165:3000/item/detail/${bookId}`;
+    // const apiUrl = `http://10.0.0.165:3000/item/detail/${bookId}`;
+    const apiUrl = `http://10.0.2.2:3000/item/detail/${bookId}`;
     axios.get(apiUrl)
       .then((response) => {
         if (response.status === 200) {

@@ -25,7 +25,8 @@ const [stories, setStories] = useState([]);
 const navigation = useNavigation();
 
     useEffect(() => {
-        const url  = 'https://10.0.0.165/item'
+        const url  = 'http://10.0.2.2:3000/item/'
+        // const url  = 'http://10.0.0.165:3000/item/'
         axios.get(url)
             .then((response) => {
                 if (response.status === 200) {
