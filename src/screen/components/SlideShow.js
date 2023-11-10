@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
+    color:'black'
   },
   author: {
     fontSize: 14,
