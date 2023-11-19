@@ -1,10 +1,14 @@
 import { Icon } from '@ui-kitten/components';
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const SearchIcon = () => {
+const SearchIcon = (props) => {
+  const navigation = useNavigation();
+  const stories=props.dataFromHomeScreen;
   return (
-    <TouchableOpacity onClick={() => { }}>
+    <TouchableOpacity 
+    onPress={() => {navigation.navigate('SearchScreen', { stories: stories })}}>
       <Icon style={styles.icon} name='search-outline' />
     </TouchableOpacity>
 

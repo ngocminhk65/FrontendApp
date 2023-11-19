@@ -9,7 +9,6 @@ const StoryDetail = () => {
   const [comments, setComments] = useState([]);
   const route = useRoute();
   const {bookId} = route.params
-
   const navigation = useNavigation();
 
   useEffect(() => {
