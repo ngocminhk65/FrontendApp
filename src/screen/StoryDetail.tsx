@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { View, Text, TouchableOpacity, ScrollView, TextInput, Button, Image, StyleSheet } from 'react-native';
 
@@ -7,6 +7,8 @@ const StoryDetail = () => {
   const [stories, setStories] = useState([]);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
+  const route = useRoute();
+  const {bookId} = route.params
 
   const navigation = useNavigation();
 
@@ -15,7 +17,8 @@ const StoryDetail = () => {
   }, []); 
 
   const fetchDataFromAPI = () => {
-    const apiUrl = 'http://10.0.2.2:3000/item/detail/1';
+    // const apiUrl = `http://10.0.0.165:3000/item/detail/${bookId}`;
+    const apiUrl = `http://10.0.2.2:3000/item/detail/${bookId}`;
     axios.get(apiUrl)
       .then((response) => {
         if (response.status === 200) {

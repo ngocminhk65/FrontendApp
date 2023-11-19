@@ -5,6 +5,7 @@ import axios from 'axios';
 const convertLocalhostToIP = (url) => {
     if (url.includes('localhost')) {
       url = url.replace('localhost', '10.0.2.2');
+      // url = url.replace('localhost', '10.0.0.165');
     }
     return url;
 };
@@ -14,6 +15,7 @@ const ChapterDetail = ({ route }) => {
   const { chapId } = route.params;
 
   useEffect(() => {
+    //const apiUrl = `http://10.0.0.165:3000/item/chap/${chapId}`;
     const apiUrl = `http://10.0.2.2:3000/item/chap/${chapId}`;
     axios.get(apiUrl)
       .then((response) => {
