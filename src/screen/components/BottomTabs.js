@@ -1,5 +1,5 @@
+
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 import { BottomNavigation, BottomNavigationTab, Icon, IconElement } from '@ui-kitten/components';
 
 const PersonIcon = (props): IconElement => (
@@ -26,7 +26,6 @@ const Home = (props): IconElement => (
 export const BottomTabs= (): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const navigation = useNavigation();
 
   return (
     <BottomNavigation
@@ -35,19 +34,17 @@ export const BottomTabs= (): React.ReactElement => {
     >
       <BottomNavigationTab
         icon={Home}
-        title='Trang chủ'
+        title='HOME'
         onClick={()=>{}}
       />
       <BottomNavigationTab
         icon={Mission}
-        title='Nhiệm vụ'
-        onPress={()=>{
-          navigation.navigate('Mission');
-        }}
+        title='MISSION'
+        onClick={()=>{}}
       />
       <BottomNavigationTab
         icon={PersonIcon}
-        title='Tài khoản'
+        title='USERS PROFILE'
         onClick={()=>{}}
       />
     </BottomNavigation>
