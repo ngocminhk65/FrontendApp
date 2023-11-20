@@ -7,6 +7,8 @@ import SignupScreen from './src/screen/SignupScreen';
 import HomeScreen from './src/screen/HomeScreen';
 import ChapterDetail from './src/screen/ChapterDetail';
 import SearchScreen from './src/screen/SearchScreen';
+import Mission from './src/screen/Mission'
+
 
 const Stack = createStackNavigator();
 
@@ -20,7 +22,8 @@ function App() {
         <Stack.Screen name="StoryDetail" component={StoryDetail} />
         <Stack.Screen name="ChapterDetail" component={ChapterDetail} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
-        
+        <Stack.Screen name="Mission" component={Mission} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
