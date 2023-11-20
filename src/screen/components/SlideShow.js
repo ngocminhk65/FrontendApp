@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
+import { useNavigation } from '@react-navigation/native';
 
 const SlideShow = ({ recommendedBooks }) => {
+  const navigation = useNavigation();
   return (
     <Swiper autoplay autoplayTimeout={5} style={styles.wrapper} showsButtons={true}>
       {
         recommendedBooks.map((book, index) => (
           <View key={index} style={styles.slide}>
             <TouchableOpacity style={styles.storyItem}
-              onClick={() => { }}>
+              onPress={()=>{navigation.navigate('StoryDetail', { bookId: book.id })}}>
               <Image source={{uri: book.image}} style={styles.image} />
               <Text style={styles.title}>{book.title}</Text>
               {/* <Text style={styles.author}>{book.author}</Text> */}

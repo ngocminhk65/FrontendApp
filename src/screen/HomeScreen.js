@@ -60,7 +60,8 @@ const navigation = useNavigation();
                         <View style={styles.container}>
                             <View style={{ flex: 1, flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'flex-end', }}>
                                 <Image source={require('../assets/logo.png')} style={styles.logo} />
-                                <SearchIcon />
+                                <SearchIcon 
+                                dataFromHomeScreen={stories} />
                                 <GridIcon />
                             </View>
                             <View style={{ flex: 2, }} >
