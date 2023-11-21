@@ -38,7 +38,7 @@ const Tab = createBottomTabNavigator();
         options={{
           tabBarLabel: 'Mission',
           tabBarIcon: ({ color, size }) => (
-            <Icon name="Super" color={color} size={size} />
+            <Icon name="book" color={color} size={size} />
           ),
         }}
       />
@@ -48,7 +48,7 @@ const Tab = createBottomTabNavigator();
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (
-            <Icon name="account" color={color} size={size} />
+            <Icon name="user" color={color} size={size} />
           ),
         }}
       />
