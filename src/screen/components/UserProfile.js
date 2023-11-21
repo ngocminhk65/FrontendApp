@@ -3,12 +3,12 @@ import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { ImageBackground } from 'react-native';
 import { Avatar } from '@ui-kitten/components';
 
-const AvatarImage = (): React.ReactElement => (
-  <Avatar
-    source={require('../assets/avt.png')}
-    ImageComponent={ImageBackground}
-  />
-);
+// const AvatarImage = () => (
+//   <Avatar
+    
+//     ImageComponent={ImageBackground}
+//   />
+// );
 
 const UserProfile = () => {
   return (
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { UserProfile, AvatarImage };
+export { UserProfile };

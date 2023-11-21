@@ -1,4 +1,4 @@
-import React, {  useEffect,useState } from 'react';
+import React, {  useContext, useEffect,useState } from 'react';
 import {
     View, Text,
     Image,
@@ -8,10 +8,8 @@ import {
     LayoutAnimation,
     SectionList,
 } from 'react-native';
-import { SearchBar, SearchIcon, GridIcon } from './components/SearchBar'; // Thêm import SearchBar
-import { UserProfile, AvatarImage } from './components/UserProfile'; // Thêm import UserProfile
+import { SearchBar, SearchIcon, GridIcon } from './components/SearchBar'; 
 import SlideShow from './components/SlideShow';
-import { BottomTabs } from './components/BottomTabs';
 import { ApplicationProvider, IconRegistry, Layout } from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
@@ -81,7 +79,6 @@ const navigation = useNavigation();
                         </View>
                     </ScrollView>
                 </Layout>
-                <BottomTabs />
             </>
         )
 }

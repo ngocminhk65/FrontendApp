@@ -14,7 +14,7 @@ const SearchIcon = (props) => {
 
   )
 }
-const GridIcon = (): React.ReactElement => {
+const GridIcon = () => {
   return (
     <TouchableOpacity onClick={() => { }}>
       <Icon style={styles.icon} name='grid-outline' />
@@ -22,7 +22,7 @@ const GridIcon = (): React.ReactElement => {
   )
 }
 
-const SearchBar = (): React.ReactElement => {
+const SearchBar = () => {
   const [searchText, setSearchText] = useState('');
 
   const handleSearch = () => {
