@@ -2,28 +2,28 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { BottomNavigation, BottomNavigationTab, Icon, IconElement } from '@ui-kitten/components';
 
-const PersonIcon = (props): IconElement => (
+const PersonIcon = (props) => (
   <Icon
     {...props}
     name='person-outline'
   />
 );
 
-const Mission = (props): IconElement => (
+const Mission = (props)=> (
   <Icon
     {...props}
     name='book-outline'
   />
 );
 
-const Home = (props): IconElement => (
+const Home = (props) => (
   <Icon
     {...props}
     name='home-outline'
   />
 );
 
-export const BottomTabs= (): React.ReactElement => {
+export const BottomTabs= () => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const navigation = useNavigation();

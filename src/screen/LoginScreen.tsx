@@ -38,7 +38,7 @@ export default function LoginScreen() {
         return;
       }
 
-      const response = await axios.post('http://10.0.2.2:3000/auth/login', {
+      const response = await axios.post('http://10.0.0.165:3000/auth/login', {
         email: email,
         password: password,
       });
@@ -51,7 +51,8 @@ export default function LoginScreen() {
         // Chuyển hướng hoặc thực hiện các hành động khác sau khi đăng nhập thành công
       } else {
         console.log('Đăng nhập thành công');
-        navigation.navigate('HomeScreen');
+        // document day nhe : https://reactnavigation.org/docs/nesting-navigators/#navigating-to-a-screen-in-a-nested-navigator
+        navigation.navigate('app');
         // Hiển thị thông báo lỗi hoặc thực hiện các hành động khác khi đăng nhập thất bại
       }
     } catch (error) {

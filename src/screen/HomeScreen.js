@@ -1,4 +1,4 @@
-import React, {  useEffect,useState } from 'react';
+import React, {  useContext, useEffect,useState } from 'react';
 import {
     View, Text,
     Image,
@@ -9,9 +9,7 @@ import {
     SectionList,
 } from 'react-native';
 import { SearchBar, SearchIcon, GridIcon } from './components/SearchBar'; // Thêm import SearchBar
-import { UserProfile, AvatarImage } from './components/UserProfile'; // Thêm import UserProfile
 import SlideShow from './components/SlideShow';
-import { BottomTabs } from './components/BottomTabs';
 import { ApplicationProvider, IconRegistry, Layout } from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
@@ -25,8 +23,8 @@ const [stories, setStories] = useState([]);
 const navigation = useNavigation();
 
     useEffect(() => {
-        const url  = 'http://10.0.2.2:3000/item/'
-        // const url  = 'http://10.0.0.165:3000/item/'
+        // const url  = 'http://10.0.2.2:3000/item/'
+        const url  = 'http://10.0.0.165:3000/item/'
         axios.get(url)
             .then((response) => {
                 if (response.status === 200) {
@@ -81,7 +79,6 @@ const navigation = useNavigation();
                         </View>
                     </ScrollView>
                 </Layout>
-                <BottomTabs />
             </>
         )
 }

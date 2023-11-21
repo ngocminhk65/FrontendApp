@@ -8,24 +8,23 @@ import HomeScreen from './src/screen/HomeScreen';
 import ChapterDetail from './src/screen/ChapterDetail';
 import SearchScreen from './src/screen/SearchScreen';
 import Mission from './src/screen/Mission'
+import { TabProvider } from './src/components/BottomTabContext/BottomTab';
+import MyTabs from './src/Route/MyTabs';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import AuthTab from './src/Route/AuthTab';
 
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
+<GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
-      <Stack.Navigator>
-        {/* <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="SignupScreen" component={SignupScreen} />  */}
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="StoryDetail" component={StoryDetail} />
-        <Stack.Screen name="ChapterDetail" component={ChapterDetail} />
-        <Stack.Screen name="SearchScreen" component={SearchScreen} />
-        <Stack.Screen name="Mission" component={Mission} />
-
-      </Stack.Navigator>
+      <AuthTab />
+     {/* <MyTabs /> */}
     </NavigationContainer>
+    </GestureHandlerRootView>
+    
   );
 }
 
