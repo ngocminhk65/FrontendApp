@@ -5,7 +5,6 @@ import { ApplicationProvider, BottomNavigation, BottomNavigationTab, IconElement
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import Mission from '../screen/Mission';
 
 
@@ -25,7 +24,7 @@ const Tab = createBottomTabNavigator();
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Trang chủ',
           tabBarIcon: ({ color, size }) => (
             <Icon name="home" color={color} size={size} />
             
@@ -36,7 +35,7 @@ const Tab = createBottomTabNavigator();
         name="Mission"
         component={Mission}
         options={{
-          tabBarLabel: 'Mission',
+          tabBarLabel: 'Nhiệm vụ',
           tabBarIcon: ({ color, size }) => (
             <Icon name="book" color={color} size={size} />
           ),
@@ -46,7 +45,7 @@ const Tab = createBottomTabNavigator();
         name="UserProfile"
         component={UserProfile}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: 'Tài khoản',
           tabBarIcon: ({ color, size }) => (
             <Icon name="user" color={color} size={size} />
           ),
