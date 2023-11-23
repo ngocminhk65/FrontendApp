@@ -1,14 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, Animated, Keyboard } from 'react-native';
 import { StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import { AuthContext } from '../Route/AuthTab';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
   const translateY = useRef(new Animated.Value(30)).current;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // use context in provider , and re set data in value
+  const { userData, setUserData } = useContext(AuthContext);
 
   const fadeInUp = (delay) => {
     return Animated.timing(translateY, {
@@ -32,13 +35,15 @@ export default function LoginScreen() {
   };
 
   const loginUser = async () => {
+    console.log('Đang đăng nhập');
+    
     try {
       if (!email || !password) {
         console.error('Vui lòng điền đầy đủ thông tin');
         return;
       }
 
-      const response = await axios.post('http://10.0.2.2:3000/auth/login', {
+      const response = await axios.post('http://10.0.0.165:3000/auth/login', {
         email: email,
         password: password,
       });
@@ -52,7 +57,17 @@ export default function LoginScreen() {
       } else {
         console.log('Đăng nhập thành công');
         // document day nhe : https://reactnavigation.org/docs/nesting-navigators/#navigating-to-a-screen-in-a-nested-navigator
+        // set data in context
+        // userData.setUserId(response.data.userId);
         navigation.navigate('app');
+        const user = {
+          userId: response.data.data.user.id,
+          userName: response.data.data.user.username,
+          token: response.data.data.jwt,
+          isLoggedIn: true,
+          email: response.data.data.user.email,
+        }
+        setUserData(user);
         // Hiển thị thông báo lỗi hoặc thực hiện các hành động khác khi đăng nhập thất bại
       }
     } catch (error) {
