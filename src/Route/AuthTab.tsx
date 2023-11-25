@@ -35,15 +35,16 @@ export default function AuthTab() {
     <Stack.Navigator>
       { !userData.isLoggedIn ?
         <>
-         <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false, }} /> 
+      <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false, }} /> 
       <Stack.Screen name="SignupScreen" component={SignupScreen} options={{ headerShown: false, }} /> 
         </>
         :
       <>
+      <Stack.Screen name="app" component={MyTabs} options={{ headerShown: false,}} />
       <Stack.Screen name="StoryDetail" component={StoryDetail}/> 
       <Stack.Screen name="ChapterDetail" component={ChapterDetail} /> 
       <Stack.Screen name="SearchScreen" component={SearchScreen}/>
-      <Stack.Screen name="app" component={MyTabs} options={{ headerShown: false,}} />
+    
       </>
       }
     </Stack.Navigator>
