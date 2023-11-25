@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
-import { View, Text, TouchableOpacity, ScrollView, TextInput, Button, Image, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, TextInput, Button, Image, StyleSheet, Alert } from 'react-native';
 import { API_URL } from '@env';
+import { AuthContext } from '../Route/AuthTab';
 
 const StoryDetail = () => {
   const [stories, setStories] = useState([]);
@@ -11,15 +12,27 @@ const StoryDetail = () => {
   const route = useRoute();
   const {bookId} = route.params
   const navigation = useNavigation();
+  const { userData } = useContext(AuthContext);
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${userData.token}`
+
+};
 
   useEffect(() => {
     fetchDataFromAPI();
+    console.log(userData.token);
+
   }, []); 
 
   const fetchDataFromAPI = () => {
     const apiUrl = `${API_URL}/item/detail/${bookId}`;
-    axios.get(apiUrl)
+    axios.get(apiUrl,{headers})
       .then((response) => {
+        if (response.status === 401) {
+          Alert.alert(response.data.message);
+        }
         if (response.status === 200) {
           const { data } = response;
           setStories([data]);

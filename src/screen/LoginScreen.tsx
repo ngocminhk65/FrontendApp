@@ -68,8 +68,6 @@ export default function LoginScreen() {
         // document day nhe : https://reactnavigation.org/docs/nesting-navigators/#navigating-to-a-screen-in-a-nested-navigator
         // set data in context
         // userData.setUserId(response.data.userId);
-
-        navigation.navigate('app');
         const user = {
           userId: response.data.data.user.id,
           userName: response.data.data.user.username,
@@ -78,6 +76,9 @@ export default function LoginScreen() {
           email: response.data.data.user.email,
         }
         setUserData(user);
+
+        navigation.navigate('app');
+
         // Hiển thị thông báo lỗi hoặc thực hiện các hành động khác khi đăng nhập thất bại
       }
     } catch (error) {
