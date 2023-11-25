@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, Animated, Keyboard, ActivityIndicator } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, Animated, Keyboard, ActivityIndicator, Alert } from 'react-native';
 import { StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import { API_URL } from '@env';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
@@ -38,10 +39,13 @@ export default function LoginScreen() {
         console.error('Vui lòng điền đầy đủ thông tin');
         return;
       }
+      console.log(API_URL);
+      
 
       setLoading(true); // Start loading
+      
 
-      const response = await axios.post('http://10.0.2.2:3000/auth/login', {
+      const response = await axios.post(`${API_URL}/auth/login`, {
         email: email,
         password: password,
       });
@@ -49,9 +53,10 @@ export default function LoginScreen() {
       console.log(response.data);
 
       // Xử lý phản hồi tại đây nếu cần
-      if (response.status === 401) {
+      if (response.data.status === 401) {
         console.log('Đăng nhập thất bại:', response.data.message);
-        // Chuyển hướng hoặc thực hiện các hành động khác sau khi đăng nhập thành công
+        Alert.alert('Đăng nhập thất bại', response.data.message);
+        setLoading(false);
       } else {
         console.log('Đăng nhập thành công');
         navigation.navigate('app');

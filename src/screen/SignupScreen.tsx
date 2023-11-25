@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, Animated, Keyboard, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import { API_URL } from '@env';
 
 export default function SignupScreen() {
   const navigation = useNavigation();
@@ -31,7 +32,7 @@ export default function SignupScreen() {
         return;
       }
 
-      const response = await axios.post('http://10.0.2.2:3000/auth/register', {
+      const response = await axios.post(`${API_URL}/auth/register`, {
         email: email,
         password: password,
         name: name,

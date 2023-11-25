@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import axios from 'axios';
+import { API_URL } from '@env';
 
 const convertLocalhostToIP = (url) => {
     if (url.includes('localhost')) {
@@ -16,7 +17,7 @@ const ChapterDetail = ({ route }) => {
 
   useEffect(() => {
     // const apiUrl = `http://10.0.0.165:3000/item/chap/${chapId}`;
-    const apiUrl = `http://10.0.2.2:3000/item/chap/${chapId}`;
+    const apiUrl = `${API_URL}/item/chap/${chapId}`;
     axios.get(apiUrl)
       .then((response) => {
         if (response.status === 200) {

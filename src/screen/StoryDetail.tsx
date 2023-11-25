@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { View, Text, TouchableOpacity, ScrollView, TextInput, Button, Image, StyleSheet } from 'react-native';
+import { API_URL } from '@env';
 
 const StoryDetail = () => {
   const [stories, setStories] = useState([]);
@@ -16,8 +17,7 @@ const StoryDetail = () => {
   }, []); 
 
   const fetchDataFromAPI = () => {
-    // const apiUrl = `http://10.0.0.165:3000/item/detail/${bookId}`;
-    const apiUrl = `http://10.0.2.2:3000/item/detail/${bookId}`;
+    const apiUrl = `${API_URL}/item/detail/${bookId}`;
     axios.get(apiUrl)
       .then((response) => {
         if (response.status === 200) {
