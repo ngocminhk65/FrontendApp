@@ -17,15 +17,21 @@ import { ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { API_URL } from '@env';
+import { AuthContext } from '../Route/AuthTab';
 
 const  HomeScreen = () => {
 
 const [stories, setStories] = useState([]);
 const navigation = useNavigation();
+const { userData, setUserData } = useContext(AuthContext);
+const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${userData.token}`
 
+};
     useEffect(() => {
-        const url = `${API_URL}/item`
-        axios.get(url)
+        const url = `${API_URL}/item`;
+        axios.get(url, { headers })
             .then((response) => {
                 if (response.status === 200) {
                     const { data } = response.data;
