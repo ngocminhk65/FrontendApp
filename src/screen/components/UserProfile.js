@@ -14,7 +14,15 @@ const UserProfile = () => {
 
   const handleLogout = () => {
     // Chuyển hướng về màn hình LoginScreen
-    navigation.navigate('LoginScreen');
+    // reset lại các state của AuthContext
+    setUserData({
+      userId: '',
+      userName: '',
+      token: '',
+      isLoggedIn: false,
+      email: '',
+    });
+    //navigation.navigate('LoginScreen');
   };
 
   return (
