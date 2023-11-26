@@ -23,18 +23,23 @@ const Home = (props) => (
   />
 );
 
+
 export const BottomTabs= () => {
+
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const navigation = useNavigation();
 
   return (
     <BottomNavigation
-      selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}
+      // selectedIndex={selectedIndex}
+      // onSelect={index => setSelectedIndex(index)}
+      selectedIndex={state.index}
+      onSelect={index => navigation.navigate(state.routeNames[index])}
     >
       <BottomNavigationTab
         icon={Home}
+
         title='Trang chủ'
         onClick={()=>{}}
       />
@@ -52,4 +57,4 @@ export const BottomTabs= () => {
       />
     </BottomNavigation>
   );
-  };
+};
