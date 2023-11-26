@@ -9,6 +9,9 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AppNavigator } from '../TabNavigator';
 import axios from 'axios';
 import Fuse from 'fuse.js';
+import { AuthContext } from '../Route/AuthTab';
+import { useContext } from 'react';
+
 
 const SearchScreen = (): React.ReactElement => {
     const route = useRoute();
@@ -20,6 +23,8 @@ const SearchScreen = (): React.ReactElement => {
     const [showResult, setShowResult] = useState(false);
     const [showOption, setShowOption] = useState(false);
     const [showRecommend, setShowRecommend] = useState(true);
+    const { userData, setUserData } = useContext(AuthContext);
+
 
     useEffect(() => {
         const dataFromHomeScreen = route.params.stories;
@@ -71,6 +76,7 @@ const SearchScreen = (): React.ReactElement => {
             />
         </TouchableWithoutFeedback>
     );
+
     const options = {
         includeScore: true,
         useExtendedSearch: true,

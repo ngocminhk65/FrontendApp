@@ -7,44 +7,23 @@ import SignupScreen from './src/screen/SignupScreen';
 import HomeScreen from './src/screen/HomeScreen';
 import ChapterDetail from './src/screen/ChapterDetail';
 import SearchScreen from './src/screen/SearchScreen';
-import TabNavigator from './src/screen/TabNavigator';
-import {
-  ApplicationProvider,
-  IconRegistry,
-  BottomNavigation,
-  BottomNavigationTab,
-  Layout,
-  Text,
-} from '@ui-kitten/components';
-import * as eva from '@eva-design/eva';
-import {EvaIconsPack} from '@ui-kitten/eva-icons';
+
+import Mission from './src/screen/Mission'
+import { TabProvider } from './src/components/BottomTabContext/BottomTab';
+import MyTabs from './src/Route/MyTabs';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import AuthTab from './src/Route/AuthTab';
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
+<GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
-      <Stack.Navigator
-        // screenOptions={{
-        //   headerShown: false,
-        // }}
-        >
-        {/* <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="SignupScreen" component={SignupScreen} />  */}
-        {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
-        <Stack.Screen name={'TabNavigator'} component={TabNavigator} />
-        <Stack.Screen name="StoryDetail" component={StoryDetail} />
-        <Stack.Screen name="ChapterDetail" component={ChapterDetail} />
-        <Stack.Screen name="SearchScreen" component={SearchScreen} />
-        
-      </Stack.Navigator>
+      <AuthTab />
     </NavigationContainer>
-    // <>
-    //   <IconRegistry icons={EvaIconsPack} />
-    //   <ApplicationProvider {...eva} theme={eva.light}>
-    //     <AppNavigator />
-    //   </ApplicationProvider>
-    // </>
+    </GestureHandlerRootView>
+   
   );
 }
 

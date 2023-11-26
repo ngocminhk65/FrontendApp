@@ -1,31 +1,34 @@
-
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { BottomNavigation, BottomNavigationTab, Icon, IconElement } from '@ui-kitten/components';
 
-const PersonIcon = (props): IconElement => (
+const PersonIcon = (props) => (
   <Icon
     {...props}
     name='person-outline'
   />
 );
 
-const Mission = (props): IconElement => (
+const Mission = (props)=> (
   <Icon
     {...props}
     name='book-outline'
   />
 );
 
-const Home = (props): IconElement => (
+const Home = (props) => (
   <Icon
     {...props}
     name='home-outline'
   />
 );
 
-export const BottomTabs = ({ navigation, state }): React.ReactElement => {
+
+export const BottomTabs= () => {
+
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const navigation = useNavigation();
 
   return (
     <BottomNavigation
@@ -36,18 +39,21 @@ export const BottomTabs = ({ navigation, state }): React.ReactElement => {
     >
       <BottomNavigationTab
         icon={Home}
-        title='HOME'
-        onClick={() => { }}
+
+        title='Trang chủ'
+        onClick={()=>{}}
       />
       <BottomNavigationTab
         icon={Mission}
-        title='MISSION'
-        onClick={() => { }}
+        title='Nhiệm vụ'
+        onPress={()=>{
+          navigation.navigate('Mission');
+        }}
       />
       <BottomNavigationTab
         icon={PersonIcon}
-        title='USERS PROFILE'
-        onClick={() => { }}
+        title='Tài khoản'
+        onClick={()=>{}}
       />
     </BottomNavigation>
   );

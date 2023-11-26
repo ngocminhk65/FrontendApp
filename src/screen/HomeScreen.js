@@ -1,4 +1,4 @@
-import React, {  useEffect,useState } from 'react';
+import React, {  useContext, useEffect,useState } from 'react';
 import {
     View, Text,
     Image,
@@ -8,26 +8,30 @@ import {
     LayoutAnimation,
     SectionList,
 } from 'react-native';
-import { SearchBar, SearchIcon, GridIcon } from './components/SearchBar'; // Thêm import SearchBar
-import { UserProfile, AvatarImage } from './components/UserProfile'; // Thêm import UserProfile
+import { SearchBar, SearchIcon, GridIcon } from './components/SearchBar'; 
 import SlideShow from './components/SlideShow';
-import { BottomTabs } from './components/BottomTabs';
 import { ApplicationProvider, IconRegistry, Layout } from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import { API_URL } from '@env';
+import { AuthContext } from '../Route/AuthTab';
 
 const  HomeScreen = () => {
 
 const [stories, setStories] = useState([]);
 const navigation = useNavigation();
+const { userData, setUserData } = useContext(AuthContext);
+const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${userData.token}`
 
+};
     useEffect(() => {
-        const url  = 'http://10.0.2.2:3000/item/'
-        // const url  = 'http://10.0.0.165:3000/item/'
-        axios.get(url)
+        const url = `${API_URL}/item`;
+        axios.get(url, { headers })
             .then((response) => {
                 if (response.status === 200) {
                     const { data } = response.data;
@@ -81,7 +85,6 @@ const navigation = useNavigation();
                         </View>
                     </ScrollView>
                 </Layout>
-                {/* <BottomTabs /> */}
             </>
         )
 }
