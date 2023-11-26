@@ -6,16 +6,20 @@ import { API_URL } from '@env';
 import { AuthContext } from '../Route/AuthTab';
 
 const StoryDetail = () => {
-  const [stories, setStories] = useState([]);
+  const [stories, setStories] = useState({});
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
+  const [listChap, setListChap] = useState([]); 
   const route = useRoute();
   const {bookId} = route.params
   const navigation = useNavigation();
   const { userData } = useContext(AuthContext);
+  const [favoriteLoading, setFavoriteLoading] = useState(false);
+  const [totalLike, setTotalLike] = useState(0);
+  const [isFavorite, setIsFavorite] = useState(false);
   
   const headers = {
-    'Content-Type': 'application/json',
+    // 'Content-Type': 'application/json',
     'Authorization': `Bearer ${userData.token}`
 
 };
@@ -29,13 +33,17 @@ const StoryDetail = () => {
   const fetchDataFromAPI = () => {
     const apiUrl = `${API_URL}/item/detail/${bookId}`;
     axios.get(apiUrl,{headers})
-      .then((response) => {
+      .then((response) => {    
         if (response.status === 401) {
           Alert.alert(response.data.message);
         }
         if (response.status === 200) {
-          const { data } = response;
-          setStories([data]);
+          const detail  = response.data.data.mangaDetail;
+          const listChap = response.data.data.listChap;
+          setListChap(listChap);
+          setStories(detail);
+          setTotalLike(detail.total_like);
+          setIsFavorite(detail.is_favorite);
         } else {
           throw new Error('Network request failed');
         }
@@ -44,12 +52,64 @@ const StoryDetail = () => {
         console.error('Lỗi khi lấy dữ liệu từ API:', error);
       });
   }
-
-    const toggleFavorite = (index) => {
-      const updatedStories = [...stories];
-      updatedStories[index].favorite = !updatedStories[index].favorite;
-      setStories(updatedStories);
+  const handleFavorite = () => {
+    setFavoriteLoading(true);
+    if (isFavorite) {
+      handleRemoveLike();
+    } else {
+      handleAddLike();
     }
+  }
+
+  const handleAddLike = () => {
+    const apiUrl = `${API_URL}/favorites/item/${bookId}`;
+
+    axios.post(apiUrl,null, { headers })
+      .then((response) => {
+        console.log(response);
+        
+        if (response.data.status === 401) {
+          Alert.alert(response.data.message);
+        }
+        if (response.data.success == true) {
+        setIsFavorite(true);
+        setTotalLike(totalLike + 1);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      }).finally(() => {
+        setFavoriteLoading(false);
+      });
+  }
+
+  const handleRemoveLike = () => {
+    const apiUrl = `${API_URL}/favorites/item/${bookId}`;
+
+    axios.delete(apiUrl, { headers })
+      .then((response) => {
+        if (response.data.status === 401) {
+          console.log(response.data);
+          
+          Alert.alert(response.data.message);
+        }
+        if (response.data.success == true) {
+          setIsFavorite(false);
+          setTotalLike(totalLike - 1);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      }).finally(() => {
+        setFavoriteLoading(false);
+      });
+  }
+
+    // const toggleFavorite = (index) => {
+    //   const updatedStories = [...stories];
+    //   updatedStories[index].favorite = !updatedStories[index].favorite;
+    //   setStories(updatedStories);
+    // }
 
     const addComment = () => {
       if (comment) {
@@ -69,27 +129,26 @@ const StoryDetail = () => {
         scrollEventThrottle={16}
         decelerationRate={0.95}
       >
-        {stories.map((story, index) => (
-          <View key={index} style={styles.storyContainer}>
+          <View  style={styles.storyContainer}>
             <Image
-              source={{ uri: story.data.mangaDetail.image }}
+              source={{ uri: stories.image_path }}
               style={styles.storyImage}
             />
             <View style={styles.textContainer}>
-              <Text style={styles.titleText}>{story.data.mangaDetail.title}</Text>
-              <TouchableOpacity onPress={() => toggleFavorite(index)}>
-                <Text style={[styles.favoriteText, { color: story.favorite ? 'red' : 'black', marginBottom: 10 }]}>
-                   Yêu thích ({story.data.mangaDetail.total_like})
+              <Text style={styles.titleText}>{stories.title}</Text>
+              <TouchableOpacity onPress={() =>handleFavorite()}>
+                <Text style={[styles.favoriteText, { color: isFavorite ? 'red' : 'black', marginBottom: 10 }]}>
+                   {favoriteLoading ? "Loading" : "Yêu thích"} ({totalLike})
                 </Text>
               </TouchableOpacity>
               <Text style={styles.descriptionTitleText}>Mô tả truyện:</Text>
               <Text style={[styles.summarySmallText, { marginBottom: 10 }]}>
-                {story.data.mangaDetail.description}
+                {stories.description}
               </Text>
               <Text style={styles.summarySmall}>
                 Chapter:
               </Text>
-              {story.data.listChap.map((chap, index) => (
+              {listChap.map((chap, index) => (
                 <TouchableOpacity key={index} onPress={() => navigateToChapterDetail(chap.id)}>
                   <View style={styles.chapterContainer}>
                     <Text style={styles.chapterText}>
@@ -100,9 +159,9 @@ const StoryDetail = () => {
               ))}
             </View>
           </View>
-        ))}
+
         <Text style={styles.commentText}>
-          Có tất cả {stories[0]?.data.mangaDetail.total_comment} bình luận
+          Có tất cả {stories?.total_comment} bình luận
         </Text>
         <TextInput
           placeholder="Nhập bình luận"

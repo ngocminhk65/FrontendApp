@@ -4,6 +4,7 @@ import axios from 'axios';
 import { API_URL } from '@env';
 import { AuthContext } from '../Route/AuthTab';
 import { useNavigation } from '@react-navigation/native';
+import FastImage from 'react-native-fast-image'
 
 const convertLocalhostToIP = (url) => {
     if (url.includes('localhost')) {
@@ -60,7 +61,7 @@ const ChapterDetail = ({ route }) => {
         data={images}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <Image source={{ uri: convertLocalhostToIP(item.image_path) }} style={styles.image} />
+          <FastImage source={{ uri: convertLocalhostToIP(item.image_path) }} style={styles.image}  resizeMode={FastImage.resizeMode.contain}/>
         )}
       />
     </View>
