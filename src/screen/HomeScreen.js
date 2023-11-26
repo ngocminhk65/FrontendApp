@@ -81,7 +81,7 @@ const navigation = useNavigation();
                         </View>
                     </ScrollView>
                 </Layout>
-                <BottomTabs />
+                {/* <BottomTabs /> */}
             </>
         )
 }

@@ -8,6 +8,7 @@ import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AppNavigator } from '../TabNavigator';
 import axios from 'axios';
+import Fuse from 'fuse.js';
 
 const SearchScreen = (): React.ReactElement => {
     const route = useRoute();
@@ -70,18 +71,29 @@ const SearchScreen = (): React.ReactElement => {
             />
         </TouchableWithoutFeedback>
     );
+    const options = {
+        includeScore: true,
+        useExtendedSearch: true,
+        keys: ['title']
+    }
+
 
     const searchFilterFunction = (text) => {
         // Check if searched text is not blank
+
         if (text) {
             // Inserted text is not blank
-            const newData = stories.filter(function (item) {
-                const itemData = item.title
-                    ? item.title.toUpperCase()
-                    : ''.toUpperCase();
-                const textData = text.toUpperCase();
-                return itemData.indexOf(textData) > -1;
-            });
+            // const newData = stories.filter(function (item) {
+            //     const itemData = item.title
+            //         ? item.title.toUpperCase()
+            //         : ''.toUpperCase();
+            //     const textData = text.toUpperCase();
+            //     return itemData.indexOf(textData) > -1;
+            // });
+            const fuse = new Fuse(stories, options);
+            const newData = fuse.search(text);
+            console.log(newData);
+            // newData=newData[0]
             setData(newData);
             setValue(text);
         } else {
@@ -95,7 +107,8 @@ const SearchScreen = (): React.ReactElement => {
         return (
             // Flat List Item
             <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-                {item.title.toUpperCase()}
+                {/* {item.title.toUpperCase()} */}
+                {item.item.title.toUpperCase()}
             </Text>
         );
     };

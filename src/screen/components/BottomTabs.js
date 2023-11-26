@@ -23,30 +23,32 @@ const Home = (props): IconElement => (
   />
 );
 
-export const BottomTabs= (): React.ReactElement => {
+export const BottomTabs = ({ navigation, state }): React.ReactElement => {
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   return (
     <BottomNavigation
-      selectedIndex={selectedIndex}
-      onSelect={index => setSelectedIndex(index)}
+      // selectedIndex={selectedIndex}
+      // onSelect={index => setSelectedIndex(index)}
+      selectedIndex={state.index}
+      onSelect={index => navigation.navigate(state.routeNames[index])}
     >
       <BottomNavigationTab
         icon={Home}
         title='HOME'
-        onClick={()=>{}}
+        onClick={() => { }}
       />
       <BottomNavigationTab
         icon={Mission}
         title='MISSION'
-        onClick={()=>{}}
+        onClick={() => { }}
       />
       <BottomNavigationTab
         icon={PersonIcon}
         title='USERS PROFILE'
-        onClick={()=>{}}
+        onClick={() => { }}
       />
     </BottomNavigation>
   );
-  };
+};
