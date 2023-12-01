@@ -40,6 +40,7 @@ const StoryDetail = () => {
         if (response.status === 200) {
           const detail  = response.data.data.mangaDetail;
           const listChap = response.data.data.listChap;
+          console.log(response.data.data.listChap);
           setListChap(listChap);
           setStories(detail);
           setTotalLike(detail.total_like);

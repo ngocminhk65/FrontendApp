@@ -8,8 +8,8 @@ import FastImage from 'react-native-fast-image'
 
 const convertLocalhostToIP = (url) => {
     if (url.includes('localhost')) {
-      //url = url.replace('localhost', '10.0.2.2');
-       url = url.replace('localhost', '10.0.0.165');
+       url = url.replace('localhost', '10.0.2.2');
+       // url = url.replace('localhost', '10.0.0.165');
     }
     return url;
 };
@@ -24,7 +24,7 @@ const ChapterDetail = ({ route }) => {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${userData.token}`
 
-};
+  };
   useEffect(() => {
     // const apiUrl = `http://10.0.0.165:3000/item/chap/${chapId}`;
     setLoading(true);
@@ -37,7 +37,6 @@ const ChapterDetail = ({ route }) => {
         console.log(response.data.status);
         if(response.data.status === 404){
           console.log(response.data.message);
-          
           Alert.alert(response.data.message);
           navigation.navigate('app');
         }

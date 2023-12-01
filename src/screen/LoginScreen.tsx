@@ -56,8 +56,6 @@ export default function LoginScreen() {
         password: password,
       });
 
-      console.log(response.data);
-
       // Xử lý phản hồi tại đây nếu cần
       if (response.data.status === 401) {
         console.log('Đăng nhập thất bại:', response.data.message);

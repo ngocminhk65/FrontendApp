@@ -1,4 +1,3 @@
-
 import React, { useEffect, useCallback, useState } from "react";
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { TouchableWithoutFeedback, View, Text, TouchableOpacity, StyleSheet, Image, SafeAreaView } from 'react-native';
@@ -97,10 +96,12 @@ const SearchScreen = (): React.ReactElement => {
             //     return itemData.indexOf(textData) > -1;
             // });
             const fuse = new Fuse(stories, options);
-            const newData = fuse.search(text);
-            console.log(newData);
+            const newData = fuse.search(text.toUpperCase());
+            const result=newData.map(obj => obj.item)
+            // console.log(newData);
             // newData=newData[0]
-            setData(newData);
+            // setData(newData);
+            setData(result);
             setValue(text);
         } else {
             // Inserted text is blank
@@ -113,8 +114,7 @@ const SearchScreen = (): React.ReactElement => {
         return (
             // Flat List Item
             <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-                {/* {item.title.toUpperCase()} */}
-                {item.item.title.toUpperCase()}
+                {item.title.toUpperCase()}
             </Text>
         );
     };
@@ -133,7 +133,7 @@ const SearchScreen = (): React.ReactElement => {
     };
 
     const getItem = (item) => {
-        // setShowResult(false);
+        // setShowResult(false);s
         setValue(item.title);
         searchFilterFunction(item.title);
     };

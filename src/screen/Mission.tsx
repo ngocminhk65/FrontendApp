@@ -1,30 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native';
- import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_URL } from '@env';
+import { AuthContext } from '../Route/AuthTab';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios'; // Import thư viện Axios
 
 const Mission: React.FC = () => {
   const [isClaimed, setIsClaimed] = useState(false);
-
+  const { userData } = useContext(AuthContext);
+  
   useEffect(() => {
     // Kiểm tra trạng thái khi component được render
     checkClaimStatus();
   }, []);
 
   const handleClaim = async () => {
-   // Kiểm tra xem đã nhận nhiệm vụ chưa và ngày nhận gần nhất
+    // Kiểm tra xem đã nhận nhiệm vụ chưa và ngày nhận gần nhất
     const lastClaimDate = await AsyncStorage.getItem('lastClaimDate');
     const currentDate = new Date().toLocaleDateString();
 
     if (!isClaimed && lastClaimDate !== currentDate) {
-      // Gọi hàm hoặc API để cộng thêm 100 xu cho người dùng (đây chỉ là ví dụ, bạn cần thay thế bằng logic thực tế của bạn)
-      // addUserCoins(100);
+      try {
 
-      // Lưu lại ngày nhận xu gần nhất
-      await AsyncStorage.setItem('lastClaimDate', currentDate);
+        // Gọi API để cộng thêm xu cho người dùng
+        const response = await axios.post(
+          `${API_URL}/item/addPrice`, 
+          { price: 100 }, 
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${userData.token}`,
+            },
+          }
+        );
 
-      // Đánh dấu nhiệm vụ đã được nhận
-      setIsClaimed(true);
-      Alert.alert('Bạn đã nhận nhiệm vụ thành công! Bạn đã được thưởng 100 xu.');
+        // Xử lý kết quả từ server
+        console.log(response.data);
+
+        // Lưu lại ngày nhận xu gần nhất
+        await AsyncStorage.setItem('lastClaimDate', currentDate);
+
+        // Đánh dấu nhiệm vụ đã được nhận
+        setIsClaimed(true);
+        Alert.alert('Bạn đã nhận nhiệm vụ thành công! Bạn đã được thưởng 100 xu.');
+      } catch (error) {
+        // Xử lý lỗi khi gọi API
+        console.error('Error calling API:', error);
+      }
     } else {
       Alert.alert('Bạn đã nhận nhiệm vụ trong ngày hôm nay hoặc đã nhận trước đó.');
     }
@@ -32,7 +54,7 @@ const Mission: React.FC = () => {
 
   const checkClaimStatus = async () => {
     // Kiểm tra trạng thái khi component được render
-     const lastClaimDate = await AsyncStorage.getItem('lastClaimDate');
+    const lastClaimDate = await AsyncStorage.getItem('lastClaimDate');
     const currentDate = new Date().toLocaleDateString();
 
     if (lastClaimDate === currentDate) {
