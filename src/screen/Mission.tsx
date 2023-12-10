@@ -7,7 +7,7 @@ import axios from 'axios'; // Import thư viện Axios
 
 const Mission: React.FC = () => {
   const [isClaimed, setIsClaimed] = useState(false);
-  const { userData } = useContext(AuthContext);
+  const { userData, setUserData } = useContext(AuthContext);
   
   useEffect(() => {
     // Kiểm tra trạng thái khi component được render
@@ -43,6 +43,12 @@ const Mission: React.FC = () => {
         // Đánh dấu nhiệm vụ đã được nhận
         setIsClaimed(true);
         Alert.alert('Bạn đã nhận nhiệm vụ thành công! Bạn đã được thưởng 100 xu.');
+        // const user=userData;
+        // user.price+=100;
+
+        let user=userData;
+        user.price+=100;
+        setUserData(user);
       } catch (error) {
         // Xử lý lỗi khi gọi API
         console.error('Error calling API:', error);

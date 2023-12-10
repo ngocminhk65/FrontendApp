@@ -72,6 +72,7 @@ export default function LoginScreen() {
           token: response.data.data.jwt,
           isLoggedIn: true,
           email: response.data.data.user.email,
+          price: response.data.data.user.price,
         }
         setUserData(user);
 
