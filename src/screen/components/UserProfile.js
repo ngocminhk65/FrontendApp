@@ -21,6 +21,7 @@ const UserProfile = () => {
       token: '',
       isLoggedIn: false,
       email: '',
+      price:0,
     });
     //navigation.navigate('LoginScreen');
   };
@@ -35,7 +36,7 @@ const UserProfile = () => {
         Email: {userData.email}
       </Text>
       <Text style={[styles.text, { fontSize: 18, color: 'black' }]}>
-        Xu hiện có: {user.xu}
+        Xu hiện có: {userData.price}
       </Text>
       <View style={styles.buttonContainer}>
         <Button title="Đăng xuất" onPress={handleLogout} />

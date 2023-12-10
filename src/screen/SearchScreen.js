@@ -143,6 +143,7 @@ const SearchScreen = (): React.ReactElement => {
     }
 
     const onSubmit = (text) => {
+        // searchFilterFunction(text);
         setShowOption(false);
         setResults(data);
         setShowResult(true);
