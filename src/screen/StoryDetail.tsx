@@ -21,7 +21,6 @@ const StoryDetail = () => {
   const headers = {
     // 'Content-Type': 'application/json',
     'Authorization': `Bearer ${userData.token}`
-
 };
 
   useEffect(() => {

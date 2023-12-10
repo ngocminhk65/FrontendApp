@@ -7,7 +7,7 @@ import axios from 'axios'; // Import thư viện Axios
 
 const Mission: React.FC = () => {
   const [isClaimed, setIsClaimed] = useState(false);
-  const { userData } = useContext(AuthContext);
+  const { userData, setUserData } = useContext(AuthContext);
   
   useEffect(() => {
     // Kiểm tra trạng thái khi component được render
@@ -25,7 +25,7 @@ const Mission: React.FC = () => {
         // Gọi API để cộng thêm xu cho người dùng
         const response = await axios.post(
           `${API_URL}/item/addPrice`, 
-          { price: 100 }, 
+          { price: 500 }, 
           {
             headers: {
               'Content-Type': 'application/json',
@@ -39,10 +39,12 @@ const Mission: React.FC = () => {
 
         // Lưu lại ngày nhận xu gần nhất
         await AsyncStorage.setItem('lastClaimDate', currentDate);
-
+        const data= userData;
+        data.price += 500;
+        setUserData(data);
         // Đánh dấu nhiệm vụ đã được nhận
         setIsClaimed(true);
-        Alert.alert('Bạn đã nhận nhiệm vụ thành công! Bạn đã được thưởng 100 xu.');
+        Alert.alert('Bạn đã nhận nhiệm vụ thành công! Bạn đã được thưởng 500 xu.');
       } catch (error) {
         // Xử lý lỗi khi gọi API
         console.error('Error calling API:', error);
