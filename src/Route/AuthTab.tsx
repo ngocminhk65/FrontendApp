@@ -28,7 +28,7 @@ export default function AuthTab() {
     token: '',
     isLoggedIn: false,
     email: '',
-    price:'',
+    price: 0,
   });
   const value = { userData, setUserData };
   return (

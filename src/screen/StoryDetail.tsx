@@ -34,6 +34,7 @@ const StoryDetail = () => {
     Authorization: `Bearer ${userData.token}`,
   };
 
+
   useEffect(() => {
     fetchDataFromAPI();
     console.log(userData.token);
