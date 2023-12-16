@@ -19,10 +19,8 @@ const Mission: React.FC = () => {
     // Kiểm tra xem đã nhận nhiệm vụ chuyển xu chưa và ngày nhận gần nhất
     const lastTransferDate = await AsyncStorage.getItem('lastTransferDate');
     const currentDate = new Date().toLocaleDateString();
-    
-    console.log(userData.isTranfer);
 
-    if (userData.isTransfer == true && lastTransferDate !== currentDate) {
+    if (userData.isTransfer ==  undefined && lastTransferDate !== currentDate) {
       try {
         await AsyncStorage.setItem('lastTransferDate', currentDate);
   
@@ -38,7 +36,7 @@ const Mission: React.FC = () => {
         console.error('Error calling API:', error);
       }
     } else {
-      Alert.alert('Bạn đã nhận nhiệm vụ chuyển xu trong ngày hôm nay hoặc đã nhận trước đó.');
+      Alert.alert('Bạn đã nhận nhiệm vụ này rồi.');
     }
   };
 
@@ -105,7 +103,7 @@ const Mission: React.FC = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.subtitleContainer}>
-          <Text style={styles.subtitle}>2. Chuyển xu cho 1 người bạn</Text>
+          <Text style={styles.subtitle}>2.  Chuyển xu cho 1 bạn</Text>
         <TouchableOpacity style={[styles.button, isTransferClaimed && styles.disabledButton]} onPress={handleTransferClaim} disabled={isTransferClaimed}>
           <Text style={[styles.buttonText, isTransferClaimed && styles.disabledButtonText]}>{isTransferClaimed ? 'Đã nhận' : 'Nhận'}</Text>
         </TouchableOpacity>

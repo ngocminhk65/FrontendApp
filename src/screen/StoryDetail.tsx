@@ -287,7 +287,7 @@ const StoryDetail = () => {
                 <Text style={styles.chapterText}>{chap.name}</Text>
                 {!chap.canRead ? (
                   <>
-                    <Text>Lock</Text>
+                    <Text> Khoá </Text>
                     
                      {/* <Icon/> */}
                   </>
@@ -336,6 +336,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+    width: 380,
   },
   chapterText: {
     fontSize: 15,

@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   image: {
-    width: 400,
+    width: 380,
     height: 400,
   },
 });
