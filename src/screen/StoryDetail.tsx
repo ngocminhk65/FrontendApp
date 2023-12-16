@@ -302,26 +302,29 @@ const StoryDetail = () => {
         </View>
       </View>
 
-      {/* <Text style={styles.commentText}>
-        Có tất cả {stories?.total_comment} bình luận
-      </Text>
-      <TextInput
-        placeholder="Nhập bình luận"
-        onChangeText={text => setComment(text)}
-        value={comment}
-        style={styles.commentInput}
-      />
-      <Button
-        title="Gửi bình luận"
-        onPress={addComment}
-        style={styles.commentButton}
-      />
+      <View>
+            <Text style={styles.commentText}>
+                 Có tất cả {stories?.total_comment} bình luận
+            </Text>
+            <TextInput
+                 placeholder="Nhập bình luận"
+                 onChangeText={text => setComment(text)}
+                 value={comment}
+                 style={styles.commentInput}
+            />
+             <Button
+                 title="Gửi bình luận"
+                 onPress={addComment}
+                 style={styles.commentButton}
+              />
 
-      {comments.map((comment, index) => (
-        <View key={index} style={styles.commentContainer}>
-          <Text style={styles.commentText}>{comment}</Text>
-        </View>
-      ))} */}
+             {comments.map((comment, index) => (
+                 <View key={index} style={styles.commentContainer}>
+                     <Text style={styles.commentText}>{comment}</Text>
+                 </View>
+              ))}
+      </View>
+
     </ScrollView>
   );
 };

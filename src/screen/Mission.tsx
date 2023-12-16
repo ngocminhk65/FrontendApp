@@ -7,12 +7,40 @@ import axios from 'axios'; // Import thư viện Axios
 
 const Mission: React.FC = () => {
   const [isClaimed, setIsClaimed] = useState(false);
+  const [isTransferClaimed, setIsTransferClaimed] = useState(false);
   const { userData, setUserData } = useContext(AuthContext);
-  
+
   useEffect(() => {
     // Kiểm tra trạng thái khi component được render
     checkClaimStatus();
   }, []);
+  
+  const handleTransferClaim = async () => {
+    // Kiểm tra xem đã nhận nhiệm vụ chuyển xu chưa và ngày nhận gần nhất
+    const lastTransferDate = await AsyncStorage.getItem('lastTransferDate');
+    const currentDate = new Date().toLocaleDateString();
+    
+    console.log(userData.isTranfer);
+
+    if (userData.isTransfer == true && lastTransferDate !== currentDate) {
+      try {
+        await AsyncStorage.setItem('lastTransferDate', currentDate);
+  
+        // Đánh dấu nhiệm vụ đã được nhận
+        setIsTransferClaimed(true);
+        const data = userData;
+        data.isTranfer = true;
+        setUserData(data);
+        // Hiển thị thông báo khi chuyển xu thành công
+        Alert.alert('Bạn đã nhận nhiệm vụ chuyển xu thành công!');
+      } catch (error) {
+        // Xử lý lỗi khi gọi API
+        console.error('Error calling API:', error);
+      }
+    } else {
+      Alert.alert('Bạn đã nhận nhiệm vụ chuyển xu trong ngày hôm nay hoặc đã nhận trước đó.');
+    }
+  };
 
   const handleClaim = async () => {
     // Kiểm tra xem đã nhận nhiệm vụ chưa và ngày nhận gần nhất
@@ -76,6 +104,12 @@ const Mission: React.FC = () => {
           <Text style={[styles.buttonText, isClaimed && styles.disabledButtonText]}>{isClaimed ? 'Đã nhận' : 'Nhận'}</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.subtitleContainer}>
+          <Text style={styles.subtitle}>2. Chuyển xu cho 1 người bạn</Text>
+        <TouchableOpacity style={[styles.button, isTransferClaimed && styles.disabledButton]} onPress={handleTransferClaim} disabled={isTransferClaimed}>
+          <Text style={[styles.buttonText, isTransferClaimed && styles.disabledButtonText]}>{isTransferClaimed ? 'Đã nhận' : 'Nhận'}</Text>
+        </TouchableOpacity>
+       </View>
     </View>
   );
 };

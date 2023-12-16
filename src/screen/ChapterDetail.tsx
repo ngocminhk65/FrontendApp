@@ -23,7 +23,6 @@ const ChapterDetail = ({ route }) => {
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${userData.token}`
-
   };
   useEffect(() => {
     // const apiUrl = `http://10.0.0.165:3000/item/chap/${chapId}`;
@@ -82,7 +81,6 @@ const styles = StyleSheet.create({
   image: {
     width: 400,
     height: 400,
-    marginBottom: 8,
   },
 });
 
