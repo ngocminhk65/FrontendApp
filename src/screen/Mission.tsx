@@ -65,9 +65,10 @@ const Mission: React.FC = () => {
 
         // Lưu lại ngày nhận xu gần nhất
         await AsyncStorage.setItem('lastClaimDate', currentDate);
-        const data= userData;
-        data.price += 500;
-        setUserData(data);
+        setUserData({
+          ...userData,
+          price: userData.price + 500,
+        });      
         // Đánh dấu nhiệm vụ đã được nhận
         setIsClaimed(true);
         Alert.alert('Bạn đã nhận nhiệm vụ thành công! Bạn đã được thưởng 500 xu.');
