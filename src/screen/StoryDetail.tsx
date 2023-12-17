@@ -278,27 +278,22 @@ const StoryDetail = () => {
             </TouchableOpacity>
           ))} */}
 
-          {listChap.map((chap, index) => (
-            <TouchableOpacity
-              key={index}
-              // onPress={() => navigateToChapterDetail(chap.id)}
-              onPress={() => selectChap(chap)}>
-              <View style={styles.chapterContainer}>
-                <Text style={styles.chapterText}>{chap.name}</Text>
-                {!chap.canRead ? (
-                  <>
-                    <Text> Khoá </Text>
-                    
-                     {/* <Icon/> */}
-                  </>
-                ) : (
-                  <>
-                    {/* <Text>Unlock</Text> */}
-                  </>
-                )}
+      {listChap.map((chap, index) => (
+        <TouchableOpacity
+          key={index}
+          onPress={() => selectChap(chap)}>
+          <View style={styles.chapterContainer}>
+          <View style={styles.chapterTextContainer}>
+              <Text style={styles.chapterText}>{chap.name}</Text>
+              {!chap.canRead ? (
+                <View style={styles.khoaContainer}>
+                <Image source={require('../assets/khoa.png')} style={styles.khoaImage} />
               </View>
-            </TouchableOpacity>
-          ))}
+              ) : null}
+            </View>
+          </View>
+        </TouchableOpacity>
+      ))}
         </View>
       </View>
 
@@ -337,10 +332,22 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     width: 380,
+    alignItems: 'center',
+  },
+  chapterTextContainer: {
+    alignItems: 'center', // Căn giữa theo chiều ngang
   },
   chapterText: {
     fontSize: 15,
     color: 'black',
+  },
+  khoaContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  khoaImage: {
+    width: 20, // Điều chỉnh kích thước hình ảnh theo nhu cầu
+    height: 20, // Điều chỉnh kích thước hình ảnh theo nhu cầu
   },
   storyContainer: {
     padding: 10,
