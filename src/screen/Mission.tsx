@@ -104,7 +104,7 @@ const Mission: React.FC = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.subtitleContainer}>
-          <Text style={styles.subtitle}>2.  Chuyển xu cho 1 bạn</Text>
+          <Text style={styles.subtitle}>2. Chuyển xu cho 1 bạn </Text>
         <TouchableOpacity style={[styles.button, isTransferClaimed && styles.disabledButton]} onPress={handleTransferClaim} disabled={isTransferClaimed}>
           <Text style={[styles.buttonText, isTransferClaimed && styles.disabledButtonText]}>{isTransferClaimed ? 'Đã nhận' : 'Nhận'}</Text>
         </TouchableOpacity>

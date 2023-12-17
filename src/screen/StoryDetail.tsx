@@ -193,10 +193,10 @@ const StoryDetail = () => {
         });
           setListChap(newListChap);
 
-          let user=userData;
-          user.price-=chap.price;
-          console.log({user},{userData});
-          setUserData(user);
+          setUserData({
+            ...userData,
+            price: userData.price - 200,
+          }); 
 
           Alert.alert(
             data.message.toString(),

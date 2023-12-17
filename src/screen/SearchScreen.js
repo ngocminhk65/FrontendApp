@@ -78,7 +78,7 @@ const SearchScreen = (): React.ReactElement => {
 
     const options = {
         includeScore: true,
-        useExtendedSearch: true,
+        // useExtendedSearch: true,
         keys: ['title']
     }
 

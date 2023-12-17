@@ -99,9 +99,10 @@ const UserProfile = () => {
       console.log('API Response:', response.data);
   
       if (response.data.success) {
-        const data = userData;
-        data.isTranfer = true;
-        setUserData(data);
+        setUserData({
+          ...userData,
+          price: userData.price - 200,
+        }); 
         // Hiển thị thông báo khi chuyển xu thành công
         Alert.alert(
           'Thông báo',
