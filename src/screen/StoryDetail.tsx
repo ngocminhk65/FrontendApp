@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import {API_URL} from '@env';
 import {AuthContext} from '../Route/AuthTab';
-import { Icon } from '@ui-kitten/components';
+import {Icon} from '@ui-kitten/components';
 
 const StoryDetail = () => {
   const [stories, setStories] = useState({});
@@ -34,7 +34,6 @@ const StoryDetail = () => {
     Authorization: `Bearer ${userData.token}`,
   };
 
-
   useEffect(() => {
     fetchDataFromAPI();
     console.log(userData.token);
@@ -51,7 +50,7 @@ const StoryDetail = () => {
         if (response.status === 200) {
           const detail = response.data.data.mangaDetail;
           const listChap = response.data.data.listChap;
-          console.log(response.data.data.listChap);
+          // console.log(response.data.data.listChap);
           setListChap(listChap);
           setStories(detail);
           setTotalLike(detail.total_like);
@@ -136,13 +135,14 @@ const StoryDetail = () => {
     }
   };
 
-  const navigateToChapterDetail = chapId => {
-    navigation.navigate('ChapterDetail', {chapId});
+  const navigateToChapterDetail = chap => {
+    // navigation.navigate('ChapterDetail', {chap});
+    navigation.navigate('ChapterDetail', {chap: chap, listChap: listChap});
   };
 
-  const selectChap = (chap) => {
+  const selectChap = chap => {
     if (chap.canRead) {
-      navigateToChapterDetail(chap.id);
+      navigateToChapterDetail(chap);
     } else {
       Alert.alert(
         'Chapter hiện đang bị khóa.',
@@ -168,7 +168,7 @@ const StoryDetail = () => {
     }
   };
 
-  const permission = (chap) => {
+  const permission = chap => {
     axios
       .post(
         `${API_URL}/item/buy/chap/${chap.id}`,
@@ -185,18 +185,18 @@ const StoryDetail = () => {
         let data = response.data.data;
 
         if (data.success) {
-          let newListChap = listChap.map((item )=> {
+          let newListChap = listChap.map(item => {
             if (item.id == chap.id) {
               item.canRead = true;
             }
             return item;
-        });
+          });
           setListChap(newListChap);
 
           setUserData({
             ...userData,
             price: userData.price - 200,
-          }); 
+          });
 
           Alert.alert(
             data.message.toString(),
@@ -204,7 +204,7 @@ const StoryDetail = () => {
             [
               {
                 text: 'Mở',
-                onPress: () => navigateToChapterDetail(chap.id),
+                onPress: () => navigateToChapterDetail(chap),
               },
               {
                 text: 'Thoát',
@@ -271,55 +271,55 @@ const StoryDetail = () => {
           {listChap.map((chap, index) => (
             <TouchableOpacity
               key={index}
-              onPress={() => navigateToChapterDetail(chap.id)}>
+              onPress={() => navigateToChapterDetail(chap)}>
               <View style={styles.chapterContainer}>
                 <Text style={styles.chapterText}>{chap.name}</Text>
               </View>
             </TouchableOpacity>
           ))} */}
 
-      {listChap.map((chap, index) => (
-        <TouchableOpacity
-          key={index}
-          onPress={() => selectChap(chap)}>
-          <View style={styles.chapterContainer}>
-          <View style={styles.chapterTextContainer}>
-              <Text style={styles.chapterText}>{chap.name}</Text>
-              {!chap.canRead ? (
-                <View style={styles.khoaContainer}>
-                <Image source={require('../assets/khoa.png')} style={styles.khoaImage} />
+          {listChap.map((chap, index) => (
+            <TouchableOpacity key={index} onPress={() => selectChap(chap)}>
+              <View style={styles.chapterContainer}>
+                <View style={styles.chapterTextContainer}>
+                  <Text style={styles.chapterText}>{chap.name}</Text>
+                  {!chap.canRead ? (
+                    <View style={styles.khoaContainer}>
+                      <Image
+                        source={require('../assets/khoa.png')}
+                        style={styles.khoaImage}
+                      />
+                    </View>
+                  ) : null}
+                </View>
               </View>
-              ) : null}
-            </View>
-          </View>
-        </TouchableOpacity>
-      ))}
+            </TouchableOpacity>
+          ))}
         </View>
       </View>
 
       <View>
-            <Text style={styles.commentText}>
-                 Có tất cả {stories?.total_comment} bình luận
-            </Text>
-            <TextInput
-                 placeholder="Nhập bình luận"
-                 onChangeText={text => setComment(text)}
-                 value={comment}
-                 style={styles.commentInput}
-            />
-             <Button
-                 title="Gửi bình luận"
-                 onPress={addComment}
-                 style={styles.commentButton}
-              />
+        <Text style={styles.commentText}>
+          Có tất cả {stories?.total_comment} bình luận
+        </Text>
+        <TextInput
+          placeholder="Nhập bình luận"
+          onChangeText={text => setComment(text)}
+          value={comment}
+          style={styles.commentInput}
+        />
+        <Button
+          title="Gửi bình luận"
+          onPress={addComment}
+          style={styles.commentButton}
+        />
 
-             {comments.map((comment, index) => (
-                 <View key={index} style={styles.commentContainer}>
-                     <Text style={styles.commentText}>{comment}</Text>
-                 </View>
-              ))}
+        {comments.map((comment, index) => (
+          <View key={index} style={styles.commentContainer}>
+            <Text style={styles.commentText}>{comment}</Text>
+          </View>
+        ))}
       </View>
-
     </ScrollView>
   );
 };
