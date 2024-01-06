@@ -169,7 +169,7 @@ const UserProfile = () => {
               onChangeText={(text) => setRecipientUser(text)}
               value={recipientUser}
             />
-            <Text style={styles.additionalText}>Lưu ý: Hạn mức chuyển xu cố định: 200 xu/ 1 lần / 1 ngày</Text>
+            <Text style={styles.additionalText}>Lưu ý: Hạn mức chuyển xu cố định: 200 xu/ 1 người / 1 ngày</Text>
             <TouchableOpacity onPress={handleConfirmTransfer}>
               <Text style={styles.button}>Xác nhận</Text>
             </TouchableOpacity>

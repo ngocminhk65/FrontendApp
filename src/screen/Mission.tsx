@@ -44,7 +44,6 @@ const Mission: React.FC = () => {
     // Kiểm tra xem đã nhận nhiệm vụ chưa và ngày nhận gần nhất
     const lastClaimDate = await AsyncStorage.getItem('lastClaimDate');
     const currentDate = new Date().toLocaleDateString();
-
     if (!isClaimed && lastClaimDate !== currentDate) {
       try {
 
